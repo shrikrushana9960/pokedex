@@ -1,0 +1,17 @@
+.parent{
+    height: 90vh;
+    overflow: auto;
+    display: flex;
+    justify-content: center;;
+    
+    flex-direction: column;
+    align-items: center;
+
+    .container{
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+    }
+}

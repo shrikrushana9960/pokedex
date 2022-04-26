@@ -1,0 +1,31 @@
+.popupbody{
+    display: flex;
+    width: 100%;
+    
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    height: 80vh ;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    .divider{
+        border-bottom: 5px solid black;
+    }
+    .model_container{
+        display: flex;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+       .title{
+           font-weight: 700;
+           font-size: 30px;
+       }
+    }
+    .tagtitle{
+      
+        font-weight: 500;
+        font-size: 18px;
+    }
+}
