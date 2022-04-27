@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import {Result} from "antd";
 import Login from './Pages/Login';
@@ -11,8 +11,9 @@ function App() {
     <div className="App">
      <Router>
         <Switch>
-          <Route exact path="/" component={Pockemon} />
-          <Route path="/login" component={Login} />
+        <Route path="/" component={Login} exact />
+          <Route exact path="/home" component={Pockemon} />
+          <Route path="/login" component={Login} exact/>
         
 
           <Route>
