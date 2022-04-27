@@ -12,7 +12,7 @@ const Cards = ({item,index,fav}) => {
 
   const getData = () => {
             
-    fetch(`http://localhost:4001/api/getFav?email=${email}`)
+    fetch(`https://pockemon-task.herokuapp.com/api/getFav?email=${email}`)
       .then((res) => {
         if (res.status === 200) {
         
@@ -37,7 +37,7 @@ const Cards = ({item,index,fav}) => {
   
   const addFAV = () => {
     
-    fetch("http://localhost:4001/api/addFav", {
+    fetch("https://pockemon-task.herokuapp.com/api/addFav", {
       method: "POST",
       body: JSON.stringify({name:item.name,email, url:item.url}),
       headers: {

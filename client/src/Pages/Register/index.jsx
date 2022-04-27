@@ -13,7 +13,7 @@ const Register = () => {
   
   const onSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4001/api/signup", {
+    fetch("https://pockemon-task.herokuapp.com/api/signup", {
       method: "POST",
       body: JSON.stringify({name,email, password}),
       headers: {
@@ -23,7 +23,7 @@ const Register = () => {
       .then((res) => {
         if (res.status === 200) {
           console.log(res)
-          message.success("sucessfully registe");
+          message.success("sucessfully register");
           history.push("/login");
          
         } else {

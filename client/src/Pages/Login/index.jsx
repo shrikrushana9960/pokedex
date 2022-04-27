@@ -27,7 +27,7 @@ const Login = () => {
   }
   const onSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4001/api/authenticate", {
+    fetch("https://pockemon-task.herokuapp.com/api/authenticate", {
       method: "POST",
       body: JSON.stringify({email, password}),
       headers: {

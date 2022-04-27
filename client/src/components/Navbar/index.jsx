@@ -16,7 +16,7 @@ const Navbar = ({fav}) => {
     useEffect(()=>{
         const getData = () => {
             
-            fetch(`http://localhost:4001/api/getFav?email=${email}`)
+            fetch(`https://pockemon-task.herokuapp.com/api/getFav?email=${email}`)
               .then((res) => {
                 if (res.status === 200) {
                 
