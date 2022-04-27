@@ -97,7 +97,7 @@ const Cards = ({item,index,fav}) => {
     style={{ width: 200,margin:10,border: "solid 5px black",borderRadius:"20px",overflow:"hidden" }}
     hoverable
     actions={[
-        <HeartFilled key="fav" onClick={addFAV}/>,
+        <HeartFilled key="fav" style={{ color:fav.data.filter(value=>value.name===item.name).length>0?'#db0707':'lightgrey' }} onClick={addFAV}/>,
       ]}
     >
       <div className={styles.card_inner} onClick={() => setVisible(true)}>
