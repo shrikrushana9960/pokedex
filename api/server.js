@@ -120,28 +120,5 @@ app.post(
   authorise.bind(null, [Role.TAX_PAYER], makePayment)
 );
 
-const createDefaultUsers = () => {
-  const path = "./.deploy/users.json";
-  fs.readFile(path, "utf8", function (err, data) {
-    if (err) return console.error(err);
-    const usersConf = JSON.parse(data);
-    usersConf.users.forEach((user) => User.create(user));
-  });
-};
-const createStates = () => {
-  const path = "./.deploy/states.json";
-  fs.readFile(path, "utf8", function (err, data) {
-    if (err) return console.error(err);
-    const stateConf = JSON.parse(data);
-    stateConf.states.forEach((state) => State.create(state));
-  });
-};
-
-const startup = () => {
-  createDefaultUsers();
-  createStates();
-};
-
-startup();
 
 module.exports = { app, server };
