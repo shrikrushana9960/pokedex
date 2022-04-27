@@ -1,16 +1,30 @@
 import styles from './login.module.scss'
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {Button, Form, Input,  Typography,message} from "antd";
 import {LockTwoTone, MailTwoTone} from "@ant-design/icons";
 import { Link } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
+
 import { useHistory } from 'react-router-dom';
 const {Title} = Typography;
 const Login = () => {
   const [email, setLocalEmail] = useState("");
   const [password, setPassword] = useState("");
   const history=useHistory()
+  const useremail=localStorage.getItem('email')
 
- 
+  useEffect(()=>{
+      if(useremail)
+      {
+          history.push("/home")
+      }
+  },[])
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
+  const componentClicked=(data)=>{
+    console.log(data)
+  }
   const onSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:4001/api/authenticate", {
@@ -41,10 +55,11 @@ const Login = () => {
         message.error("Error logging in please try again");
       });
   };
+  
  
   return (
     <div className={styles.login}>
-         <img src={'http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png'} height={100}/>
+         <img src={'http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png'} alt='logo' height={100}/>
         <Title level={1} style={{marginBottom:"20px"}} >
          
           Pocodoc</Title>
@@ -99,10 +114,17 @@ const Login = () => {
             Log In
           </Button>
           <p></p>
-          <p>Don't have a account ? <Link to="/register"><a>Register</a></Link></p>
+          <p>Don't have a account ? <Link to="/register">Register</Link></p>
          
         </Form.Item>
+        <FacebookLogin
+    appId="525109242318264"
+    autoLoad={true}
+    
+    onClick={componentClicked}
+    callback={responseFacebook} />
       </Form>
+     
         </div>
         
         </div>

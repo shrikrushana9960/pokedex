@@ -1,13 +1,67 @@
 import React, { useState,useEffect } from 'react';
 import styles from "./cards.module.scss"
-import {Card,Modal} from 'antd'
+import {Card,Modal,message} from 'antd'
 import { HeartFilled  } from '@ant-design/icons';
 import Popup from './Popup';
 const { Meta } = Card;
-const Cards = ({item,index}) => {
+const Cards = ({item,index,fav}) => {
   const [visible, setVisible] = useState(false);
   const [data,setData]=useState();
+  const email=localStorage.getItem('email')
+  const [like,setLiked]=useState(false);
+
+  const getData = () => {
+            
+    fetch(`http://localhost:4001/api/getFav?email=${email}`)
+      .then((res) => {
+        if (res.status === 200) {
+        
+         
+        } else {
+          throw new Error(res.error);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res)
+        
+        fav.add_data(res)
+        
+        
+      })
+      .catch((err) => {
+        console.error(err);
+        message.error("cannot get Data");
+      });
+  };
+  
+  const addFAV = () => {
+    
+    fetch("http://localhost:4001/api/addFav", {
+      method: "POST",
+      body: JSON.stringify({name:item.name,email, url:item.url}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          message.success("added to Fav");
+          getData()
+         
+        } else {
+          throw new Error(res.error);
+        }
+       
+      })
+     
+      .catch((err) => {
+        console.error(err);
+        message.error("Already in Favourite  list");
+      });
+  };
   const loadData = () => {
+    
    
     fetch(item.url)
       .then(res => res.json())
@@ -43,11 +97,11 @@ const Cards = ({item,index}) => {
     style={{ width: 200,margin:10,border: "solid 5px black",borderRadius:"20px",overflow:"hidden" }}
     hoverable
     actions={[
-        <HeartFilled key="fav" />,
+        <HeartFilled key="fav" onClick={addFAV}/>,
       ]}
     >
       <div className={styles.card_inner} onClick={() => setVisible(true)}>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.url.split('/')[6]}.png`}/>
+      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.url.split('/')[6]}.png`} alt={item.name}/>
     <Meta title={item.name}  />
     </div>
     </Card>

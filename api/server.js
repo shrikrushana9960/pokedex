@@ -56,19 +56,19 @@ app.post("/api/signup", function (req, res) {
     }
   });
 });
-app.post("/api/addFav",extractUserDetails, function (req, res) {
-  const { name, userid, url } = req.body;
-  const user = new User({ name, userid, url });
-  user.save(function (err) {
-    if (err) {
-      internalServerError(res, "added to favourite");
-    } else {
-      res.status(200).send("can't add to favourite");
-    }
-  });
+app.get("/api/getFav",async function (req, res) {
+ let email= req.query.email
+ if(!email)
+ {
+   res.status(410).send("send email")
+ }
+ const data=await Fav.find({email:email})
+ res.status(200).send(data)
+   
 });
 
-app.post("/api/getFav/",extractUserDetails, function (req, res) {
+app.post("/api/addFav/", function (req, res) {
+  
   const { name, email, url } = req.body;
   const fav = new Fav({ name, email, url });
   fav.save(function (err) {

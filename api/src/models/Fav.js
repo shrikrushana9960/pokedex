@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const FavSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   email: { type: String, required: true },
-  url: { type: String, required: true },
+  url: { type: String, required: true, unique: true },
 
 });
 

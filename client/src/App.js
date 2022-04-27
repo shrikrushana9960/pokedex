@@ -1,32 +1,39 @@
+
 import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "antd/dist/antd.css";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import {Result} from "antd";
 import Login from './Pages/Login';
 import Pockemon from './Pages/Pockemon';
-
+import Register from './Pages/Register';
 function App() {
   return (
-    <div className="App">
-     <Router>
-        <Switch>
-        <Route path="/" component={Login} exact />
-          <Route exact path="/home" component={Pockemon} />
-          <Route path="/login" component={Login} exact/>
+    <Router>
+      <Switch>
         
-
-          <Route>
+        <Route path="/login" exact>
+          <Login />
+        </Route>
+      
+        <Route path="/home" exact>
+          <Pockemon />
+        </Route>
+        <Route path="/register" exact>
+          <Register />
+        </Route>
+        <Route path="/" exact>
+          <Login />
+        </Route>
+        
+        <Route>
             <Result
               status="404"
               title="404"
               subTitle="Sorry, the page you visited does not exist."
-              extra={<Link to="/login">Back Home</Link>}
+              extra={<NavLink to="/login">Back Home</NavLink>}
             />
           </Route>
-        </Switch>
-      </Router>
-    </div>
+      </Switch>
+    </Router>
   );
 }
 

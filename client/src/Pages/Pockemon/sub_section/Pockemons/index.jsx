@@ -1,16 +1,15 @@
-import { Row,Col } from 'antd'
+
 import React,{useState,useEffect} from 'react'
 import styles from './pockemons.module.scss'
 import Cards from '../../../../components/Cards/Cards'
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { List, message, Avatar, Skeleton, Divider } from 'antd';
 import { Pagination } from 'antd';
-
-const Pockemons = () => {
+import { Fav } from '../../../../store/Fav';
+import { observer } from "mobx-react-lite" 
+const Pockemons = ({fav}) => {
+    
     
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [pockemons,setPockemons]=useState([]);
     const [count,setCount]=useState(0);
     const loadMoreData = (value) => {
       console.log(value)
@@ -33,6 +32,8 @@ const Pockemons = () => {
           });
       };
       useEffect(() => {
+       
+        console.log(fav.data)
         loadMoreData(0);
       }, []);
       function onChnage(value) {
@@ -45,7 +46,7 @@ const Pockemons = () => {
       
           <div className={styles.container} >
           
-          {data.map((item,index)=><Cards key={index} item={item} index={(count*12)+index}/>)}
+          {data.map((item,index)=><Cards fav={fav} key={index} item={item} index={(count*12)+index}/>)}
           
          
           </div>

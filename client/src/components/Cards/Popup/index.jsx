@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar,Card,Divider,Tag } from 'antd'
+import { Avatar,Divider,Tag } from 'antd'
 import styles  from "./popup.module.scss"
 const Popup = ({data,index}) => {
     
