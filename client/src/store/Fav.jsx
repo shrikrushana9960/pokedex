@@ -1,11 +1,11 @@
 import { action, makeObservable, observable } from "mobx";
 
-export class Fav{
+ class Fav{
     data=[];
 
     constructor(){
         makeObservable(this,{
-           
+            data:observable,
             add_data:action
         })
     }
@@ -13,3 +13,4 @@ export class Fav{
         this.data=[...values]
     } 
 }
+export const fav=new Fav()

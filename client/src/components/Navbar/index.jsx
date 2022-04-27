@@ -27,7 +27,7 @@ const Navbar = ({fav}) => {
                 return res.json();
               })
               .then((res) => {
-                console.log(res)
+                
                 
                 fav.add_data(res)
                 

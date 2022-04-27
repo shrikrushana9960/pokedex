@@ -36,7 +36,7 @@ const Login = () => {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res)
+          
          
         } else {
           throw new Error(res.error);
@@ -44,7 +44,7 @@ const Login = () => {
         return res.json();
       })
       .then((res) => {
-        console.log(res)
+        
         localStorage.setItem("token",res.token)
         localStorage.setItem("email",email);
         history.push("/home");
@@ -131,4 +131,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default  Login

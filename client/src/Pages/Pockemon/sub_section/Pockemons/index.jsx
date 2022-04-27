@@ -3,8 +3,6 @@ import React,{useState,useEffect} from 'react'
 import styles from './pockemons.module.scss'
 import Cards from '../../../../components/Cards/Cards'
 import { Pagination } from 'antd';
-import { Fav } from '../../../../store/Fav';
-import { observer } from "mobx-react-lite" 
 const Pockemons = ({fav}) => {
     
     
@@ -35,7 +33,7 @@ const Pockemons = ({fav}) => {
        
         console.log(fav.data)
         loadMoreData(0);
-      }, []);
+      }, [count]);
       function onChnage(value) {
         loadMoreData(value-1)
       

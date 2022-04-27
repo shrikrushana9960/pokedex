@@ -22,7 +22,7 @@ const Register = () => {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res)
+          
           message.success("sucessfully register");
           history.push("/login");
          

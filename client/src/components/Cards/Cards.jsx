@@ -3,13 +3,19 @@ import styles from "./cards.module.scss"
 import {Card,Modal,message} from 'antd'
 import { HeartFilled  } from '@ant-design/icons';
 import Popup from './Popup';
+import { observer } from "mobx-react-lite";
+
 const { Meta } = Card;
 const Cards = ({item,index,fav}) => {
   const [visible, setVisible] = useState(false);
   const [data,setData]=useState();
   const email=localStorage.getItem('email')
-  const [like,setLiked]=useState(false);
-
+  const [like,setLiked]=useState(false)
+  useEffect(()=>{
+    console.log(fav.data.filter(value=>value.name===item.name))
+    let result=fav.data.filter(value=>value.name===item.name).length>0?true:false;
+    setLiked(result)
+  },[fav.data,index])
   const getData = () => {
             
     fetch(`https://pockemon-task.herokuapp.com/api/getFav?email=${email}`)
@@ -23,7 +29,7 @@ const Cards = ({item,index,fav}) => {
         return res.json();
       })
       .then((res) => {
-        console.log(res)
+        
         
         fav.add_data(res)
         
@@ -36,7 +42,7 @@ const Cards = ({item,index,fav}) => {
   };
   
   const addFAV = () => {
-    
+    if(!like)
     fetch("https://pockemon-task.herokuapp.com/api/addFav", {
       method: "POST",
       body: JSON.stringify({name:item.name,email, url:item.url}),
@@ -59,6 +65,9 @@ const Cards = ({item,index,fav}) => {
         console.error(err);
         message.error("Already in Favourite  list");
       });
+    else{
+      message.error("already added in Favourite")
+    }
   };
   const loadData = () => {
     
@@ -75,10 +84,11 @@ const Cards = ({item,index,fav}) => {
       });
   };
   useEffect(()=>{
+
     
     if(visible)
     loadData()
-  },[visible])
+  },[visible,fav])
   return (
     <div>
     <Modal
@@ -89,6 +99,7 @@ const Cards = ({item,index,fav}) => {
     width={1000}
     style={{borderRadius:"30px",overflow:'hidden',border: "solid 5px black"}}
   >
+
     <Popup data={data} index={index}/>
     
     </Modal>
@@ -97,16 +108,17 @@ const Cards = ({item,index,fav}) => {
     style={{ width: 200,margin:10,border: "solid 5px black",borderRadius:"20px",overflow:"hidden" }}
     hoverable
     actions={[
-        <HeartFilled key="fav" style={{ color:fav.data.filter(value=>value.name===item.name).length>0?'#db0707':'lightgrey' }} onClick={addFAV}/>,
+        <HeartFilled key="fav" style={{color:like ?'#db0707':'lightgrey' }} disabled={like?true:false} onClick={addFAV}/>,
       ]}
     >
       <div className={styles.card_inner} onClick={() => setVisible(true)}>
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.url.split('/')[6]}.png`} alt={item.name}/>
     <Meta title={item.name}  />
+    
     </div>
     </Card>
     </div>
   )
 }
 
-export default Cards
+export default  observer(Cards);
