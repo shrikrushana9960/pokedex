@@ -1,6 +1,6 @@
-import React from 'react'
-import { Avatar,Divider,Tag } from 'antd'
-import styles  from "./popup.module.scss"
+import React from "react";
+import { Avatar,Divider,Tag } from "antd";
+import styles  from "./popup.module.scss";
 const Popup = ({data,index}) => {
     
   return (
@@ -16,25 +16,25 @@ const Popup = ({data,index}) => {
 <Divider className={styles.divider}/>
 <p className={styles.tagtitle}> Moves</p>
 <div className={styles.moves}>
-{data.moves&&data.moves.map(item=><Tag color="#f50">{item.move.name}</Tag>)}
+{data.moves&&data.moves.map((index,item)=><Tag key={`move_name_${index}`} color="#f50">{item.move.name}</Tag>)}
 
 </div>
 <Divider className={styles.divider}/>
 <p className={styles.tagtitle}>Abilities</p>
 <div className={styles.moves}>
-{data.abilities&&data.abilities.map(item=><Tag color="red">{item.ability.name}</Tag>)}
+{data.abilities&&data.abilities.map((index,item)=><Tag  key={`tag_color_red_${index}`} color="red">{item.ability.name}</Tag>)}
 
 </div>
 <Divider className={styles.divider}/>
 <p className={styles.tagtitle}>Stats</p>
 <div className={styles.moves}>
-{data.stats&&data.stats.map(item=><Tag color="blue">{item.stat.name}</Tag>)}
+{data.stats&&data.stats.map((index,item)=><Tag key={`tag_color_blue_1_${index}`} color="blue">{item.stat.name}</Tag>)}
 
 </div>
 <Divider className={styles.divider}/>
 <p className={styles.tagtitle}>types</p>
 <div className={styles.moves}>
-{data.types&&data.types.map(item=><Tag color="blue">{item.type.name}</Tag>)}
+{data.types&&data.types.map((index,item)=><Tag key={`tag_color_blue_2_${index}`}color="blue">{item.type.name}</Tag>)}
 
 </div>
 <Divider className={styles.divider}/>
@@ -57,7 +57,7 @@ const Popup = ({data,index}) => {
 
     
     </>
-  )
-}
+  );
+};
 
-export default Popup
+export default Popup;

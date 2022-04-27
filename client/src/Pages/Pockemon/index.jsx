@@ -1,9 +1,9 @@
-
-import Navbar from '../../components/Navbar'
-import { fav } from '../../store/Fav'
-import styles from "./pockemon.module.scss"
-import Pockemons from './sub_section/Pockemons'
-import Search from "./sub_section/Search"
+import React from "react";
+import Navbar from "../../components/Navbar";
+import { fav } from "../../store/Fav";
+import styles from "./pockemon.module.scss";
+import Pockemons from "./sub_section/Pockemons";
+import Search from "./sub_section/Search";
 const Pockemon = () => {
 
   return (
@@ -12,7 +12,7 @@ const Pockemon = () => {
     <Search fav={fav}/>
     <Pockemons fav={fav}/>
   </div>
-  )
-}
+  );
+};
 
-export default  Pockemon
+export default  Pockemon;

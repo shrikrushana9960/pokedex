@@ -1,8 +1,8 @@
 
-import React,{useState,useEffect} from 'react'
-import styles from './pockemons.module.scss'
-import Cards from '../../../../components/Cards/Cards'
-import { Pagination } from 'antd';
+import React,{useState,useEffect} from "react";
+import styles from "./pockemons.module.scss";
+import Cards from "../../../../components/Cards/Cards";
+import { Pagination } from "antd";
 const Pockemons = ({fav}) => {
     
     
@@ -10,8 +10,8 @@ const Pockemons = ({fav}) => {
     const [data, setData] = useState([]);
     const [count,setCount]=useState(0);
     const loadMoreData = (value) => {
-      console.log(value)
-      setCount(value)
+      console.log(value);
+      setCount(value);
         if (loading) {
           return;
         }
@@ -21,7 +21,7 @@ const Pockemons = ({fav}) => {
         fetch(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=${12*value}`)
           .then(res => res.json())
           .then(body => {
-            setCount(body.count)
+            setCount(body.count);
             setData([...body.results]);
             setLoading(false);
           })
@@ -31,11 +31,11 @@ const Pockemons = ({fav}) => {
       };
       useEffect(() => {
        
-        console.log(fav.data)
+        console.log(fav.data);
         loadMoreData(0);
       }, [count]);
       function onChnage(value) {
-        loadMoreData(value-1)
+        loadMoreData(value-1);
       
       }
   return (
@@ -54,7 +54,7 @@ const Pockemons = ({fav}) => {
      
     </div>
     
-  )
-}
+  );
+};
 
-export default Pockemons
+export default Pockemons;

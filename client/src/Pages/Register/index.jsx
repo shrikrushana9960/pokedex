@@ -1,15 +1,15 @@
-import styles from './register.module.scss'
-import React, { useState } from 'react';
+import styles from "./register.module.scss";
+import React, { useState } from "react";
 import {Button, Form, Input,  Typography,message} from "antd";
 import {LockTwoTone, MailTwoTone,UserOutlined} from "@ant-design/icons";
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const {Title} = Typography;
 const Register = () => {
   const [email, setLocalEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name,setLocalName]=useState("");
-  const history=useHistory()
+  const history=useHistory();
   
   const onSubmit = (event) => {
     event.preventDefault();
@@ -40,7 +40,7 @@ const Register = () => {
  
   return (
     <div className={styles.login}>
-         <img src={'http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png'} alt='logo' height={100}/>
+         <img src={"http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png"} alt='logo' height={100}/>
         <Title level={1} style={{marginBottom:"20px"}} >
          
           Pocodoc</Title>
@@ -123,7 +123,7 @@ const Register = () => {
         </div>
         
         </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

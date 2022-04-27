@@ -1,21 +1,21 @@
-import React, { useState,useEffect } from 'react';
-import styles from "./cards.module.scss"
-import {Card,Modal,message} from 'antd'
-import { HeartFilled  } from '@ant-design/icons';
-import Popup from './Popup';
+import React, { useState,useEffect } from "react";
+import styles from "./cards.module.scss";
+import {Card,Modal,message} from "antd";
+import { HeartFilled  } from "@ant-design/icons";
+import Popup from "./Popup";
 import { observer } from "mobx-react-lite";
 
 const { Meta } = Card;
 const Cards = ({item,index,fav}) => {
   const [visible, setVisible] = useState(false);
   const [data,setData]=useState();
-  const email=localStorage.getItem('email')
-  const [like,setLiked]=useState(false)
+  const email=localStorage.getItem("email");
+  const [like,setLiked]=useState(false);
   useEffect(()=>{
-    console.log(fav.data.filter(value=>value.name===item.name))
+    console.log(fav.data.filter(value=>value.name===item.name));
     let result=fav.data.filter(value=>value.name===item.name).length>0?true:false;
-    setLiked(result)
-  },[fav.data,index])
+    setLiked(result);
+  },[fav.data,index]);
   const getData = () => {
             
     fetch(`https://pockemon-task.herokuapp.com/api/getFav?email=${email}`)
@@ -31,7 +31,7 @@ const Cards = ({item,index,fav}) => {
       .then((res) => {
         
         
-        fav.add_data(res)
+        fav.add_data(res);
         
         
       })
@@ -53,7 +53,7 @@ const Cards = ({item,index,fav}) => {
       .then((res) => {
         if (res.status === 200) {
           message.success("added to Fav");
-          getData()
+          getData();
          
         } else {
           throw new Error(res.error);
@@ -66,7 +66,7 @@ const Cards = ({item,index,fav}) => {
         message.error("Already in Favourite  list");
       });
     else{
-      message.error("already added in Favourite")
+      message.error("already added in Favourite");
     }
   };
   const loadData = () => {
@@ -75,7 +75,7 @@ const Cards = ({item,index,fav}) => {
     fetch(item.url)
       .then(res => res.json())
       .then(body => {
-        console.log(body)
+        console.log(body);
         setData(body);
        
       })
@@ -87,8 +87,8 @@ const Cards = ({item,index,fav}) => {
 
     
     if(visible)
-    loadData()
-  },[visible,fav])
+    loadData();
+  },[visible,fav]);
   return (
     <div>
     <Modal
@@ -97,7 +97,7 @@ const Cards = ({item,index,fav}) => {
     onOk={() => setVisible(false)}
     onCancel={() => setVisible(false)}
     width={1000}
-    style={{borderRadius:"30px",overflow:'hidden',border: "solid 5px black"}}
+    style={{borderRadius:"30px",overflow:"hidden",border: "solid 5px black"}}
   >
 
     <Popup data={data} index={index}/>
@@ -108,17 +108,17 @@ const Cards = ({item,index,fav}) => {
     style={{ width: 200,margin:10,border: "solid 5px black",borderRadius:"20px",overflow:"hidden" }}
     hoverable
     actions={[
-        <HeartFilled key="fav" style={{color:like ?'#db0707':'lightgrey' }} disabled={like?true:false} onClick={addFAV}/>,
+        <HeartFilled key="fav" style={{color:like ?"#db0707":"lightgrey" }} disabled={like?true:false} onClick={addFAV}/>,
       ]}
     >
       <div className={styles.card_inner} onClick={() => setVisible(true)}>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.url.split('/')[6]}.png`} alt={item.name}/>
+      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.url.split("/")[6]}.png`} alt={item.name}/>
     <Meta title={item.name}  />
     
     </div>
     </Card>
     </div>
-  )
-}
+  );
+};
 
 export default  observer(Cards);

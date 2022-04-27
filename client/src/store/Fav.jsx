@@ -7,10 +7,10 @@ import { action, makeObservable, observable } from "mobx";
         makeObservable(this,{
             data:observable,
             add_data:action
-        })
+        });
     }
     add_data(values){
-        this.data=[...values]
+        this.data=[...values];
     } 
 }
-export const fav=new Fav()
+export const fav=new Fav();

@@ -1,5 +1,4 @@
 const express = require("express");
-const fs = require("fs");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
@@ -14,7 +13,6 @@ const withAuth = require("./src/middleware/middleware");
 const {
   authenticate,
   logout,
-  extractUserDetails,
   internalServerError,
   logger,
   getUserDetails,
@@ -22,7 +20,7 @@ const {
 
 const mongo_uri = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
-console.log(process.env.MONGODB_URI)
+console.log(process.env.MONGODB_URI);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,24 +54,21 @@ app.post("/api/signup", function (req, res) {
     }
   });
 });
-app.get("/api/getFav",async function (req, res) {
- let email= req.query.email
- if(!email)
- {
-   res.status(410).send("send email")
- }
- const data=await Fav.find({email:email})
- res.status(200).send(data)
-   
+app.get("/api/getFav", async function (req, res) {
+  let email = req.query.email;
+  if (!email) {
+    res.status(410).send("send email");
+  }
+  const data = await Fav.find({ email: email });
+  res.status(200).send(data);
 });
 
 app.post("/api/addFav/", function (req, res) {
-  
   const { name, email, url } = req.body;
   const fav = new Fav({ name, email, url });
   fav.save(function (err) {
     if (err) {
-      console.log(err)
+      console.log(err);
       internalServerError(res, "Can''t added to favourite");
     } else {
       res.status(200).send("added to favourite");
@@ -86,7 +81,5 @@ app.post("/api/logout", logout);
 app.get("/checkToken", withAuth, function (req, res) {
   res.sendStatus(200);
 });
-
-
 
 module.exports = { app, server };

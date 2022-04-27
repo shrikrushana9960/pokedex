@@ -26,7 +26,7 @@ UserSchema.pre("save", function (next) {
 });
 
 UserSchema.methods.isCorrectPassword = function (password, callback) {
-  bcrypt.compare(password, this.password, function (err, same) {
+  bcrypt.compare(password, this.password, function (err) {
     // if (err) {
     //   callback(err);
     // } else {

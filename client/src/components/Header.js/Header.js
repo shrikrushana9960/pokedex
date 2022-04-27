@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { Avatar } from 'antd';
+import React,{useState} from "react";
+import { Avatar } from "antd";
  const Header = () => {
     const [login, setLogin] = useState(false);
     if(localStorage.getItem("login")==="true")
@@ -14,6 +14,6 @@ import { Avatar } from 'antd';
         ></Avatar>
       </div>
     );
-}
+};
 
 export default Header;
