@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const useremail = localStorage.getItem("email");
-
   useEffect(() => {
     if (useremail) {
       history.push("/home");
