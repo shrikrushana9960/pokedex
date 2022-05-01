@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import FacebookLogin from "react-facebook-login";
 import { useHistory } from "react-router-dom";
 const { Title } = Typography;
+//login page
 const Login = () => {
   const [email, setLocalEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
   const useremail = localStorage.getItem("email");
   useEffect(() => {
+
     if (useremail) {
       history.push("/home");
     }

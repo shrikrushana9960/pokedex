@@ -80,6 +80,7 @@ app.post("/api/addFav/", function (req, res) {
 app.post("/api/authenticate", getUserDetails.bind(null, null), authenticate);
 app.post("/api/facebookLogin", FacebookLogin);
 app.post("/api/logout", logout);
+
 app.get("/checkToken", withAuth, function (req, res) {
   res.sendStatus(200);
 });
