@@ -6,6 +6,7 @@ import Pockemons from "./sub_section/Pockemons";
 import Search from "./sub_section/Search";
 const Pockemon = () => {
 
+  
   return (
     <div className={styles.body}>
     <Navbar fav={fav}/>

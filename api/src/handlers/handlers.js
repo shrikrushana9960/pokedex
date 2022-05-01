@@ -36,6 +36,35 @@ const authenticate = (req, res) => {
     }
   });
 };
+const FacebookLogin = (req, res) => {
+  const { name,email, token,password} = req.body;
+  User.findOne({ email }, function (err, user) {
+    if (err) {
+      internalServerError(response);
+    } else if (!user) {
+      const user = new User({ name, email, password });
+      user.save(function (err) {
+        if (err) {
+          internalServerError(res, "Error registering new user");
+        }
+      });
+    } 
+  });
+  
+   if (!token) {
+      invalidUserError(res);
+    } else {
+      const payload = { email };
+      const jwttoken = jwt.sign(payload, secret, {
+        expiresIn: "2h",
+      });
+      res
+        .status(200)
+        .cookie("token", token, { httpOnly: true })
+        .json({ name: email, token: jwttoken });
+    }
+
+};
 
 const getUserDetails = function (userEmailId, request, response, next) {
   let email = userEmailId || request.email || request.body.email;
@@ -80,4 +109,5 @@ module.exports = {
   extractUserDetails,
   logger,
   getUserDetails,
+  FacebookLogin
 };
