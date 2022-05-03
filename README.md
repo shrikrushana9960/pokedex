@@ -12,4 +12,4 @@ npm test
 ```
 
 ## live at
-https://pokemon-task-web.herokuapp.com/
+https://pocodoc.herokuapp.com/
